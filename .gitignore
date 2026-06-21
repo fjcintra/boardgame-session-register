@@ -1,0 +1,10 @@
+# Virtual environments
+venv/
+backend/venv/
+.env
+
+# Node
+node_modules/
+
+# OS generated files
+.DS_Store
