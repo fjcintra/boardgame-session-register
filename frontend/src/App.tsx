@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Profile from './components/Profile/Profile';
 import MyGames from './components/MyGames/MyGames';
+import MyMatches from './components/MyMatches/MyMatches';
 
 function App() {
   const [activePage, setActivePage] = useState('perfil');
@@ -42,6 +43,8 @@ function App() {
           <Profile />
         ) : activePage === 'jogos' ? (
           <MyGames />
+        ) : activePage === 'partidas' ? (
+          <MyMatches />
         ) : (
           <h1>Em desenvolvimento...</h1>
         )}
