@@ -74,10 +74,10 @@ boardgame-session-register-system/
    ```
 4. Configure as variáveis de ambiente em um arquivo `.env` dentro de `/backend`:
    ```env
-   DATABASE_URL=sqlite+aiosqlite:///./boardgame_tracker.db
-   SECRET_KEY=8f9c1b6ad72ea594191fe427cf63a1523ad6f73db1c52b7beea8909de198c60f
-   ACCESS_TOKEN_EXPIRE_MINUTES=1440
-   CORS_ORIGINS=["http://localhost:5173", "http://127.0.0.1:5173"]
+   DATABASE_URL=
+   SECRET_KEY=
+   ACCESS_TOKEN_EXPIRE_MINUTES=
+   CORS_ORIGINS=
    ```
 5. Inicie o servidor:
    ```bash
