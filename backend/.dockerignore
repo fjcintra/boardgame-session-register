@@ -1,0 +1,10 @@
+.venv
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+boardgame_tracker.db
+.env
+tests
+.git
+.gitignore

@@ -5,10 +5,11 @@ This document provides a comprehensive overview of the current status, used tech
 ---
 
 ## 📅 Project Status at a Glance
-- **Current Phase**: Styling Migration & Feature Polish Completed
+- **Current Phase**: Containerization & Deployment Completed
 - **Overall Progress**: 
   - **Backend**: 100% (Core API fully implemented, tested, and verified)
   - **Frontend**: 100% (Styled using Tailwind CSS v4, including unified Dark Mode toggle)
+  - **Dockerization & Deployment**: 100% (Backend and Frontend Dockerized, routed via Nginx on docker-compose)
   - **Integration**: 100% (React frontend consumes FastAPI endpoints dynamically with JWT auth)
 - **Tests**: 12/12 pytest tests passing successfully (`tests/` directory)
 
@@ -34,7 +35,15 @@ boardgame-session-register-system/
 ├── BoardGame_Tracker_Blueprint.pdf (Project guidelines & specs)
 ├── README.md                       (Project overview, installation & execution guide)
 ├── CONTEXT.md                      (This status & progress tracking file)
+├── docker-compose.yml              (Multi-container orchestration setup)
+├── verify_deployment.sh            (Automated test & verification shell script)
+├── .gitignore                      (Ignore patterns for DB, credentials, logs, and venvs)
+├── .agents/                        (Antigravity workspace customizations)
+│   └── skills/
+│       └── devops_automator/
+│           └── SKILL.md            (Custom DevOps specialist agent instruction guide)
 ├── backend/                        (FastAPI codebase)
+│   ├── Dockerfile                  (Python non-root backend image recipe)
 │   ├── app/
 │   │   ├── api/                    (API endpoints & routing)
 │   │   ├── core/                   (Security, hashing, JWT logic)
@@ -46,6 +55,8 @@ boardgame-session-register-system/
 │   ├── tests/                      (Backend tests suite)
 │   └── requirements.txt            (Backend dependencies)
 └── frontend/                       (React codebase)
+    ├── Dockerfile                  (Multi-stage build served by Nginx)
+    ├── nginx.conf                  (Nginx SPA routes fallback & API proxy configs)
     ├── src/
     │   ├── components/             (UI Views styled with Tailwind CSS)
     │   │   ├── Auth/               (Login / Register UI modal)
@@ -87,11 +98,15 @@ boardgame-session-register-system/
 | **Match History** | [x] List `/matches`<br>[x] Create `/matches`<br>[x] Read/Delete `/matches/{id}` | [x] [MyMatches.tsx](file:///home/fabio/Projetos/boardgame-session-register-system/frontend/src/components/MyMatches/MyMatches.tsx) list, sorting/filtering by games dynamically loaded, "+ Nova Partida" modal, and deletion. | [x] Complete integration. |
 | **Configuration** | [x] Handled via backend `/users/me` PUT updates | [x] [Configuracoes.tsx](file:///home/fabio/Projetos/boardgame-session-register-system/frontend/src/components/Configuracoes/Configuracoes.tsx) renders password change form. | [x] Completed integration. |
 | **Dark Mode** | *N/A (Frontend toggle)* | [x] Sidebar controls in [App.tsx](file:///home/fabio/Projetos/boardgame-session-register-system/frontend/src/App.tsx) toggles styling and persists state in localStorage. | [x] Complete class binding on document root. |
+| **Containerization & Deployment** | [x] Automatically configures PostgreSQL, executes schema creations on startup. | [x] Configured multi-stage build served by Nginx proxy routing. | [x] Complete local orchestration verified via automated test script. |
 
 ---
 
 ## 🚀 Next Steps & Roadmap
 
-1. **Production Deployment Planning**:
-   - Setup Docker containers for backend, database (PostgreSQL), and frontend.
-   - Configure reverse proxy (Nginx).
+1. **Continuous Integration (CI) Pipelines**:
+   - Write GitHub Actions workflow to run the Pytest backend tests on PR triggers.
+   - Automate `verify_deployment.sh` validation checks inside standard CI.
+
+2. **Monitoring & Logs aggregation**:
+   - Wire Prometheus metrics or centralized log handlers inside the containers.
